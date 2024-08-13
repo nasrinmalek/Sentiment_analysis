@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+        }
+        h1 {
+            color: #343a40;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+        h2 {
+            color: #495057;
+            margin-top: 0;
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            resize: vertical;
+            font-size: 1rem;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #212529;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Song Sentiment Analysis</h1>
+        <h2>Analyze Your Song Lyrics</h2>
+        <form method="post" action="{% url 'analyze_lyrics' %}">
+            {% csrf_token %}
+            <textarea name="lyrics" rows="10" placeholder="Paste your song lyrics here..."></textarea><br>
+            <button type="submit">Analyze Sentiment</button>
+        </form>
+        {% if sentiment %}
+            <div class="result">
+                The sentiment of the song lyrics is: <span>{{ sentiment }}</span>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
